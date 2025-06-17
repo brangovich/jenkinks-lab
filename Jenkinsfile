@@ -1,17 +1,18 @@
 pipeline {
     agent any
 
-   stage('Clonar proyecto') {
-    steps {
-        checkout([$class: 'GitSCM',
-            branches: [[name: '*/main']],
-            userRemoteConfigs: [[
-                url: 'https://github.com/brangovich/jenkins-lab.git',
-                credentialsId: 'github-token'
-            ]]
-        ])
-    }
-}
+    stages {
+        stage('Clonar proyecto') {
+            steps {
+                checkout([$class: 'GitSCM',
+                    branches: [[name: '*/main']],
+                    userRemoteConfigs: [[
+                        url: 'https://github.com/brangovich/jenkins-lab.git',
+                        credentialsId: 'github-token' // 👈 este es el ID que registraste en Jenkins
+                    ]]
+                ])
+            }
+        }
 
         stage('Instalar dependencias') {
             steps {
